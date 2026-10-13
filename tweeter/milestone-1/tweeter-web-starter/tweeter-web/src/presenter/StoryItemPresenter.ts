@@ -22,7 +22,7 @@ export class StoryItemPresenter extends StatusItemPresenter {
           );
     
           this.hasMoreItems = hasMore;
-          this.lastItem = newItems.length < 0 ? newItems[newItems.length - 1] : null;
+          this.lastItem = newItems.length < 0 ? null : newItems[newItems.length - 1];
           this.view.addItems(newItems);
         } catch (error) {
           this.view.displayErrorMessage(

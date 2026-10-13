@@ -17,7 +17,7 @@ export const useUserActions = (): UserActions => {
     const { updateUserInfo, clearUserInfo, setDisplayedUser } = useContext(UserInfoActionsContext)
     return {
         updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => updateUserInfo(currentUser, displayedUser, authToken, remember),
-        clearUserInfo: () => clearUserInfo,
+        clearUserInfo: clearUserInfo,
         setDisplayedUser: (user: User) => setDisplayedUser(user)
     }
 }
