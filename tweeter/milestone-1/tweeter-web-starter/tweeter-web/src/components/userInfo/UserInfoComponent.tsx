@@ -4,7 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthToken, User } from "tweeter-shared";
 import { useMessageActions } from "../hooks/MessageHooks";
 import { useUserActions, useUserInfo } from "../hooks/UserHooks";
-import { UserInfoPresenter, UserInfoView } from "../../presenter/UserInfoPresenter";
+import { UserInfoPresenter } from "../../presenter/UserInfoPresenter";
+import { PagedItemView } from "../../presenter/PagedItemPresenter";
 
 const UserInfo = () => {
   const [isFollower, setIsFollower] = useState(false);
@@ -19,8 +20,11 @@ const UserInfo = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const listener: UserInfoView = {
+  const listener: PagedItemView<User> = {
     displayErrorMessage,
+    addItems: function (items: User[]): void {
+      throw new Error("Function not implemented.");
+    }
   };
 
   const presenterRef = useRef<UserInfoPresenter | null>(null);

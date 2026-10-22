@@ -1,31 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
-import { User } from "tweeter-shared";
 import UserItem from "../userItem/UserItem";
 import { useMessageActions } from "../hooks/MessageHooks";
 import { useUserActions, useUserInfo } from "../hooks/UserHooks";
-import { UserItemPresenter, UserItemView } from "../../presenter/UserItemPresenter";
+import { PagedItemPresenter, PagedItemView } from "../../presenter/PagedItemPresenter";
+import { Service } from "../../model.service/Service";
 
-interface Props {
+interface Props<T, U extends Service> {
     featureUrl: string,
-    presenterFactory: (view: UserItemView) => UserItemPresenter
+    presenterFactory: (view: PagedItemView<T>) => PagedItemPresenter<T, U>
+    itemComponentFactory: (item: T) => JSX.Element
 }
 
-const UserItemScroller = (props: Props) => {
+const ItemScroller = <T, U extends Service>(props: Props<T, U>) => {
   const { displayErrorMessage } = useMessageActions();
-  const [items, setItems] = useState<User[]>([]);
+  const [items, setItems] = useState<T[]>([]);
 
   const { displayedUser, authToken } = useUserInfo();
   const { setDisplayedUser } = useUserActions();
   const { displayedUser: displayedUserAliasParam } = useParams();
 
-  const listener: UserItemView = {
-    addItems: (newItems: User[]) => setItems((previousItems) => [...previousItems, ...newItems]),
+  const listener: PagedItemView<T> = {
+    addItems: (newItems: T[]) => setItems((previousItems) => [...previousItems, ...newItems]),
     displayErrorMessage: displayErrorMessage
   }
 
-  const presenterRef = useRef<UserItemPresenter | null>(null)
+  const presenterRef = useRef<PagedItemPresenter<T, U> | null>(null)
 
   if(!presenterRef.current) {
     presenterRef.current = props.presenterFactory(listener)
@@ -83,4 +84,4 @@ const UserItemScroller = (props: Props) => {
   );
 }
 
-export default UserItemScroller
+export default ItemScroller

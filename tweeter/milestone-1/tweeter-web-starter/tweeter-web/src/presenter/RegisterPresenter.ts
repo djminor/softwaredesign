@@ -12,32 +12,26 @@ export class RegisterPresenter extends UserAuthPresenter {
         this.originalUrl = url
     }
 
-    public async doLoginOrRegister(updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void, navigate: (url: string) => void) {
-    try {
-      this.isLoading = true;
-
+    protected isValid(): boolean {
       if (!this.imageBytes) {
-            this.view.displayErrorMessage("Profile picture is required.");
-            return;
+        this.view.displayErrorMessage("Profile picture is required.");
+        return false;
       }
+      return true;
+    }
 
-      const [user, authToken] = await this.service.register(
+    protected async doAuth(): Promise<[User, AuthToken]> {
+      return this.service.register(
         this.firstName,
         this.lastName,
         this.alias,
         this.password,
-        this.imageBytes,
+        this.imageBytes!,
         this.imageFileExtension
       );
-
-      updateUserInfo(user, user, authToken, this.rememberMe);
-      navigate(`/feed/${user.alias}`);
-    } catch (error) {
-      this.view.displayErrorMessage(
-        `Failed to register user because of exception: ${error}`,
-      );
-    } finally {
-      this.isLoading = false;
     }
-  };
+
+    protected get authOperationDescription(): string {
+      return "register user";
+    }
 }

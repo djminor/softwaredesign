@@ -13,26 +13,16 @@ export class LoginPresenter extends UserAuthPresenter {
         this.originalUrl = url
     }
 
-    public async doLoginOrRegister(updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void, navigate: (url: string) => void) {
-            try {
-              this.isLoading = true;
-        
-              const [user, authToken] = await this.service.login(this.alias, this.password);
-        
-              updateUserInfo(user, user, authToken, this.rememberMe);
-        
-              if (!!this.originalUrl) {
-                navigate(this.originalUrl);
-              } else {
-                navigate(`/feed/${user.alias}`);
-              }
-            } catch (error) {
-              this.view.displayErrorMessage(
-                `Failed to log user in because of exception: ${error}`
-              );
-            } finally {
-              this.isLoading = false;
-            }
-    };
+    protected isValid(): boolean {
+      return true;
+    }
+
+    protected async doAuth(): Promise<[User, AuthToken]> {
+      return this.service.login(this.alias, this.password);
+    }
+
+    protected get authOperationDescription(): string {
+      return "log user in";
+    }
 
 }

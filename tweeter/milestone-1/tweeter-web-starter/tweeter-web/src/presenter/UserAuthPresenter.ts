@@ -1,12 +1,12 @@
 import { User, AuthToken } from "tweeter-shared"
+import { Presenter, View } from "./Presenter"
 
 
-export interface UserAuthView {
+export interface UserAuthView extends View{
     displayErrorMessage: (message: string) => void
 }
 
-export abstract class UserAuthPresenter {
-    private _view: UserAuthView
+export abstract class UserAuthPresenter extends Presenter<UserAuthView> {
     private _alias: string = ''
     private _password: string = ''
     private _isLoading: boolean = false
@@ -18,7 +18,7 @@ export abstract class UserAuthPresenter {
     private _imageFileExtension: string = ''
 
     protected constructor(view: UserAuthView) {
-        this._view = view
+        super(view)
     }
 
     public get firstName() {
@@ -51,10 +51,6 @@ export abstract class UserAuthPresenter {
 
     public set imageFileExtension(imageFileExtension: string) {
         this._imageFileExtension = imageFileExtension
-    }
-
-    protected get view() {
-        return this._view
     }
 
     public get alias() {
@@ -97,5 +93,28 @@ export abstract class UserAuthPresenter {
         this._originalUrl = originalUrl
     }
 
-    public abstract doLoginOrRegister(updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void, navigate: (url: string) => void): void
+    public async doLoginOrRegister(updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void, navigate: (url: string) => void) {
+        this.doFailureReportingOperation(async () => {
+            
+            if (!this.isValid()) {
+            return;
+            }
+
+            this.isLoading = true;
+
+            const [user, authToken] = await this.doAuth();
+
+            updateUserInfo(user, user, authToken, this.rememberMe);
+
+            if (!!this.originalUrl) {
+            navigate(this.originalUrl);
+            } else {
+            navigate(`/feed/${user.alias}`);
+            }
+        }, this.authOperationDescription);
+    };
+
+    protected abstract isValid(): boolean;
+    protected abstract doAuth(): Promise<[User, AuthToken]>;
+    protected abstract get authOperationDescription(): string;
 }
