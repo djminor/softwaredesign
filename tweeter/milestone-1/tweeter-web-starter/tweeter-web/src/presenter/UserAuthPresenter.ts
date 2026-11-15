@@ -17,7 +17,7 @@ export abstract class UserAuthPresenter extends Presenter<UserAuthView> {
     private _imageBytes: Uint8Array | null = null
     private _imageFileExtension: string = ''
 
-    protected constructor(view: UserAuthView) {
+    public constructor(view: UserAuthView) {
         super(view)
     }
 

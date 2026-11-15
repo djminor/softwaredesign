@@ -1,52 +1,35 @@
 import "./PostStatus.css";
 import { useState } from "react";
-import { AuthToken, Status } from "tweeter-shared";
 import { useMessageActions } from "../hooks/MessageHooks";
 import { useUserInfo } from "../hooks/UserHooks";
+import { PostStatusPresenter, PostStatusView } from "../../presenter/PostStatusPresenter"
 
-const PostStatus = () => {
+interface Props {
+  presenter?: PostStatusPresenter
+}
+
+const PostStatus = (props: Props) => {
   const { displayErrorMessage, displayInfoMessage, deleteMessage } = useMessageActions();
-
   const { currentUser, authToken } = useUserInfo();
+  
   const [post, setPost] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const submitPost = async (event: React.MouseEvent) => {
-    event.preventDefault();
-
-    var postingStatusToastId = "";
-
-    try {
-      setIsLoading(true);
-      postingStatusToastId = displayInfoMessage(
-        "Posting status...",
-        0,
-      );
-
-      const status = new Status(post, currentUser!, Date.now());
-
-      await postStatus(authToken!, status);
-
-      setPost("");
-      displayInfoMessage("Status posted!", 2000);
-    } catch (error) {
-      displayErrorMessage(
-        `Failed to post the status because of exception: ${error}`
-      );
-    } finally {
-      deleteMessage(postingStatusToastId);
-      setIsLoading(false);
-    }
+  const listener: PostStatusView = {
+    displayErrorMessage: (message: string) => displayErrorMessage(message),
+    displayInfoMessage: (message: string, duration?: number) => {
+      return displayInfoMessage(message, 0);
+    },
+    deleteMessage: (messageId: string) => deleteMessage(messageId),
+    clearPost: () => setPost(""),
+    setIsLoading: (loading: boolean) => setIsLoading(loading),
   };
 
-  const postStatus = async (
-    authToken: AuthToken,
-    newStatus: Status,
-  ): Promise<void> => {
-    // Pause so we can see the logging out message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
+  const [presenter] = useState(() => props.presenter ? props.presenter : new PostStatusPresenter(listener));
 
-    // TODO: Call the server to post the status
+  const submitPost = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    await presenter.submitPost(post, currentUser, authToken);
   };
 
   const clearPost = (event: React.MouseEvent) => {
@@ -64,6 +47,7 @@ const PostStatus = () => {
         <textarea
           className="form-control"
           id="postStatusTextArea"
+          aria-label="Post text"
           rows={10}
           placeholder="What's on your mind?"
           value={post}
@@ -75,6 +59,7 @@ const PostStatus = () => {
       <div className="form-group">
         <button
           id="postStatusButton"
+          aria-label="Post status"
           className="btn btn-md btn-primary me-1"
           type="button"
           disabled={checkButtonStatus()}
@@ -93,6 +78,7 @@ const PostStatus = () => {
         </button>
         <button
           id="clearStatusButton"
+          aria-label="Clear button"
           className="btn btn-md btn-secondary"
           type="button"
           disabled={checkButtonStatus()}

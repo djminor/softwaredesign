@@ -99,99 +99,38 @@ const UserInfo = () => {
     return segments.length > 1 ? segments[0] : "/";
   };
 
-  const followDisplayedUser = async (
-    event: React.MouseEvent,
-  ): Promise<void> => {
-    event.preventDefault();
+  const toggleFollow = async (
+  event: React.MouseEvent,
+): Promise<void> => {
+  event.preventDefault();
 
-    var followingUserToast = "";
+  let toastId = "";
+  const currentlyFollowing = isFollower;
+  const actionText = currentlyFollowing ? "Unfollowing" : "Following";
 
-    try {
-      setIsLoading(true);
-      followingUserToast = displayInfoMessage(
-        `Following ${displayedUser!.name}...`,
-        0,
-      );
+  try {
+    setIsLoading(true);
+    toastId = displayInfoMessage(
+      `${actionText} ${displayedUser!.name}...`,
+      0,
+    );
 
-      const [followerCount, followeeCount] = await follow(
-        authToken!,
-        displayedUser!,
-      );
+    const [followerCount, followeeCount] = currentlyFollowing
+      ? await presenterRef.current!.unfollow(authToken!, displayedUser!)
+      : await presenterRef.current!.follow(authToken!, displayedUser!);
 
-      setIsFollower(true);
-      setFollowerCount(followerCount);
-      setFolloweeCount(followeeCount);
-    } catch (error) {
-      displayErrorMessage(
-        `Failed to follow user because of exception: ${error}`
-      );
-    } finally {
-      deleteMessage(followingUserToast);
-      setIsLoading(false);
-    }
-  };
-
-  const follow = async (
-    authToken: AuthToken,
-    userToFollow: User,
-  ): Promise<[followerCount: number, followeeCount: number]> => {
-    // Pause so we can see the follow message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
-
-    // TODO: Call the server
-
-    const followerCount = await presenterRef.current!.getFollowerCount(authToken, userToFollow);
-    const followeeCount = await presenterRef.current!.getFolloweeCount(authToken, userToFollow);
-
-    return [followerCount, followeeCount];
-  };
-
-  const unfollowDisplayedUser = async (
-    event: React.MouseEvent,
-  ): Promise<void> => {
-    event.preventDefault();
-
-    var unfollowingUserToast = "";
-
-    try {
-      setIsLoading(true);
-      unfollowingUserToast = displayInfoMessage(
-        `Unfollowing ${displayedUser!.name}...`,
-        0,
-      );
-
-      const [followerCount, followeeCount] = await unfollow(
-        authToken!,
-        displayedUser!,
-      );
-
-      setIsFollower(false);
-      setFollowerCount(followerCount);
-      setFolloweeCount(followeeCount);
-    } catch (error) {
-      displayErrorMessage(
-        `Failed to unfollow user because of exception: ${error}`
-      );
-    } finally {
-      deleteMessage(unfollowingUserToast);
-      setIsLoading(false);
-    }
-  };
-
-  const unfollow = async (
-    authToken: AuthToken,
-    userToUnfollow: User,
-  ): Promise<[followerCount: number, followeeCount: number]> => {
-    // Pause so we can see the unfollow message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
-
-    // TODO: Call the server
-
-    const followerCount = await presenterRef.current!.getFollowerCount(authToken, userToUnfollow);
-    const followeeCount = await presenterRef.current!.getFolloweeCount(authToken, userToUnfollow);
-
-    return [followerCount, followeeCount];
-  };
+    setIsFollower(!currentlyFollowing);
+    setFollowerCount(followerCount);
+    setFolloweeCount(followeeCount);
+  } catch (error) {
+    displayErrorMessage(
+      `Failed to ${currentlyFollowing ? "unfollow" : "follow"} user because of exception: ${error}`
+    );
+  } finally {
+    deleteMessage(toastId);
+    setIsLoading(false);
+  }
+};
 
   return (
     <>
@@ -241,7 +180,7 @@ const UserInfo = () => {
                       type="submit"
                       style={{ width: "6em" }}
                       disabled={isLoading}
-                      onClick={unfollowDisplayedUser}
+                      onClick={toggleFollow}
                     >
                       {isLoading ? (
                         <span
@@ -260,7 +199,7 @@ const UserInfo = () => {
                       type="submit"
                       style={{ width: "6em" }}
                       disabled={isLoading}
-                      onClick={followDisplayedUser}
+                      onClick={toggleFollow}
                     >
                       {isLoading ? (
                         <span

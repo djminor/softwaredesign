@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
-import UserItem from "../userItem/UserItem";
 import { useMessageActions } from "../hooks/MessageHooks";
 import { useUserActions, useUserInfo } from "../hooks/UserHooks";
 import { PagedItemPresenter, PagedItemView } from "../../presenter/PagedItemPresenter";
@@ -76,7 +75,7 @@ const ItemScroller = <T, U extends Service>(props: Props<T, U>) => {
             key={index}
             className="row mb-3 mx-0 px-0 border rounded bg-white"
           >
-            <UserItem user={item} featurePath={props.featureUrl} />
+            {props.itemComponentFactory(item)}
           </div>
         ))}
       </InfiniteScroll>
