@@ -13,6 +13,7 @@ export { AuthToken } from "./model/domain/AuthToken";
 // DTOs
 
 export type { UserDto } from "./model/dto/UserDto";
+export type { AuthTokenDto } from "./model/dto/AuthTokenDto";
 
 // Requests
 
@@ -22,6 +23,7 @@ export type { IsFollowerRequest } from "./model/net/request/IsFollowerRequest";
 export type { FollowCountRequest } from "./model/net/request/FollowCountRequest";
 export type { FollowToggleRequest } from "./model/net/request/FollowToggleRequest";
 export type { GetUserRequest } from "./model/net/request/GetUserRequest";
+export type { LoginRequest } from "./model/net/request/LoginRequest";
 
 // Responses
 
@@ -31,6 +33,7 @@ export type { IsFollowerResponse } from "./model/net/response/IsFollowerResponse
 export type { FollowCountResponse } from "./model/net/response/FollowCountResponse";
 export type { FollowToggleResponse } from "./model/net/response/FollowToggleResponse";
 export type { GetUserResponse } from "./model/net/response/GetUserResponse";
+export type { AuthenticateResponse } from "./model/net/response/AuthenticateResponse";
 
 // To be removed 
 

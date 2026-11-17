@@ -1,20 +1,19 @@
-import { User, AuthToken, FakeData } from "tweeter-shared";
+// AI-assisted: see AI-ATTRIBUTION.md
+import { User, AuthToken, LoginRequest } from "tweeter-shared";
 import { Service } from "./Service";
+import { ServerFacade } from "../network/ServerFacade";
 
-export class LoginService implements Service{
-    
+export class LoginService implements Service {
+    private serverFacade = new ServerFacade();
+
     public async login (
         alias: string,
         password: string
-      ): Promise<[User, AuthToken]> {
-        // TODO: Replace with the result of calling the server
-        const user = FakeData.instance.firstUser;
-    
-        if (user === null) {
-          throw new Error("Invalid alias or password");
-        }
-    
-        return [user, FakeData.instance.authToken];
-      };
-
+    ): Promise<[User, AuthToken]> {
+        const request: LoginRequest = {
+            alias: alias,
+            password: password,
+        };
+        return this.serverFacade.login(request);
+    };
 }

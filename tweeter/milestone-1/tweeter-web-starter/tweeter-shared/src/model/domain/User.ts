@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { UserDto } from "../dto/UserDto";
 
 export class User {
@@ -82,10 +83,17 @@ export class User {
   }
 
   public get dto(): UserDto {
-    return {firstName: this.firstName, lastName: this.lastName, imageUrl: this.imageUrl, alias: this.alias}
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      alias: this.alias,
+      imageUrl: this.imageUrl,
+    };
   }
 
   public static fromDto(dto: UserDto | null): User | null {
-    return dto == null ? null : new User(dto.firstName, dto.lastName, dto.imageUrl, dto.alias);
+    return dto == null
+      ? null
+      : new User(dto.firstName, dto.lastName, dto.alias, dto.imageUrl);
   }
 }

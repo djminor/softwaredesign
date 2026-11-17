@@ -53,3 +53,9 @@
 - Tool: Antigravity
 - Task: Complete Get User end-to-end: define GetUserRequest/Response, implement GetUserLambda and server UserService.getUser, add /user/get endpoint to template.yaml, add getUser in ServerFacade, and connect client UserService.
 - Review: Agent's implementation looks good to me, didn't edit any unexpected files or stray from what we already have implemented.
+
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/dto/AuthTokenDto.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/LoginRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/AuthenticateResponse.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/domain/AuthToken.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/domain/User.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/LoginService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/user/LoginLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/LoginService.ts
+- Tool: Antigravity
+- Task: Complete Login end-to-end: define AuthTokenDto, LoginRequest, AuthenticateResponse, add AuthToken DTO helpers and fix User.fromDto parameter ordering, implement LoginLambda and server LoginService.login, add /user/login endpoint to template.yaml, add login in ServerFacade, and connect client LoginService.
+- Review: Didn't see anything wrong with the agent's implementation, though it's worth noting this one involved more than the other turns since it involved the creation of a new DTO and obviously therefore touched more functionality

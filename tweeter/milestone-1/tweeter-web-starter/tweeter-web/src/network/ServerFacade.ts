@@ -1,5 +1,7 @@
 // AI-assisted: see AI-ATTRIBUTION.md
 import {
+  AuthenticateResponse,
+  AuthToken,
   FollowCountRequest,
   FollowCountResponse,
   FollowToggleRequest,
@@ -8,6 +10,7 @@ import {
   GetUserResponse,
   IsFollowerRequest,
   IsFollowerResponse,
+  LoginRequest,
   PagedUserItemRequest,
   PagedUserItemResponse,
   User,
@@ -164,6 +167,23 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to get user");
+    }
+  }
+
+  public async login(request: LoginRequest): Promise<[User, AuthToken]> {
+    const response = await this.clientCommunicator.doPost<
+      LoginRequest,
+      AuthenticateResponse
+    >(request, "/user/login");
+
+    if (response.success && response.user && response.authToken) {
+      return [
+        User.fromDto(response.user)!,
+        AuthToken.fromDto(response.authToken)!,
+      ];
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to login");
     }
   }
 }
