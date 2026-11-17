@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { Link } from "react-router-dom";
 import { User } from "tweeter-shared";
 import { useNavigationActions } from "../hooks/NavigationHooks";
@@ -8,7 +9,10 @@ interface Props {
 }
 
 const UserItem = (props: Props) => {
-  const { navigateToUser } = useNavigationActions()
+  const { navigateToUser } = useNavigationActions();
+  const path = props.featurePath.startsWith("/")
+    ? props.featurePath
+    : `/${props.featurePath}`;
 
   return (
     <div className="col bg-light mx-0 px-0">
@@ -29,8 +33,8 @@ const UserItem = (props: Props) => {
               </b>{" "}
               -{" "}
               <Link
-                to={`/${props.featurePath}/${props.user.alias}`}
-                onClick={(e) => (navigateToUser(e, props.featurePath))}
+                to={`${path}/${props.user.alias}`}
+                onClick={(e) => navigateToUser(e, path)}
               >
                 {props.user.alias}
               </Link>

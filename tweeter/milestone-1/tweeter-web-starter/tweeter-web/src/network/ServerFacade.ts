@@ -25,7 +25,7 @@ import {
 import { ClientCommunicator } from "./ClientCommunicator";
 
 export class ServerFacade {
-  private SERVER_URL = "https://TODO_SERVER_URL";
+  private SERVER_URL = "https://vptcu0jnxc.execute-api.us-west-2.amazonaws.com/Stage";
 
   private clientCommunicator = new ClientCommunicator(this.SERVER_URL);
 

@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { AuthToken, User } from "tweeter-shared";
 import { useUserActions, useUserInfo } from "../hooks/UserHooks";
 import { useMessageActions } from "../hooks/MessageHooks";
@@ -6,64 +7,69 @@ import PropTypes from "prop-types";
 import { NavigationContexts } from "./NavigationContexts";
 import { UserService } from "../../model.service/UserService";
 
-
 interface Props {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const NavigationProvider: React.FC<Props> = ({children}) => {
-    const { setDisplayedUser } = useUserActions()
-    const { displayErrorMessage } = useMessageActions()
-    const { displayedUser, authToken } = useUserInfo();
-    const navigate = useNavigate();
+const NavigationProvider: React.FC<Props> = ({ children }) => {
+  const { setDisplayedUser } = useUserActions();
+  const { displayErrorMessage } = useMessageActions();
+  const { displayedUser, authToken } = useUserInfo();
+  const navigate = useNavigate();
 
-    const userService = new UserService()
-    
-    const navigateToUser = async (event: React.MouseEvent, featurePath: string): Promise<void> => {
-        event.preventDefault();
+  const userService = new UserService();
 
-        try {
-        const alias = extractAlias(event.target.toString());
+  const navigateToUser = async (
+    event: React.MouseEvent,
+    featurePath: string
+  ): Promise<void> => {
+    event.preventDefault();
 
-        const toUser = await getUser(authToken!, alias);
+    try {
+      const alias = extractAlias(event.target.toString());
 
-        if (toUser) {
-            if (!toUser.equals(displayedUser!)) {
-            setDisplayedUser(toUser);
-            navigate(`${featurePath}/${toUser.alias}`);
-            }
+      const toUser = await getUser(authToken!, alias);
+
+      if (toUser) {
+        if (!toUser.equals(displayedUser!)) {
+          setDisplayedUser(toUser);
+          const normalizedFeaturePath = featurePath.startsWith("/")
+            ? featurePath
+            : `/${featurePath}`;
+          navigate(`${normalizedFeaturePath}/${toUser.alias}`);
         }
-        } catch (error) {
-        displayErrorMessage(
-            `Failed to get user because of exception: ${error}`
-        );
-        }
-    };
-    const extractAlias = (value: string): string => {
-      const index = value.indexOf("@");
-      return value.substring(index);
-    };
-  
-    const getUser = async (
-      authToken: AuthToken,
-      alias: string
-    ): Promise<User | null> => {
-      // TODO: Replace with the result of calling server
-      return userService.getUser(authToken, alias)
-    };
-
-    const navigateFunctions = {
-        navigateToUser,
-        extractAlias,
-        getUser
-    }
-
-    return (
-        <NavigationContexts.Provider value={navigateFunctions}>
-            {children}
-        </NavigationContexts.Provider>
+      }
+    } catch (error) {
+      displayErrorMessage(
+        `Failed to get user because of exception: ${error}`
       );
-}
+    }
+  };
+
+  const extractAlias = (value: string): string => {
+    const index = value.indexOf("@");
+    return value.substring(index);
+  };
+
+  const getUser = async (
+    authToken: AuthToken,
+    alias: string
+  ): Promise<User | null> => {
+    return userService.getUser(authToken, alias);
+  };
+
+  const navigateFunctions = {
+    navigateToUser,
+    extractAlias,
+    getUser,
+  };
+
+  return (
+    <NavigationContexts.Provider value={navigateFunctions}>
+      {children}
+    </NavigationContexts.Provider>
+  );
+};
 
 NavigationProvider.propTypes = {
   children: PropTypes.element.isRequired,

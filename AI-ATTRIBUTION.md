@@ -95,3 +95,9 @@
 - Tool: Antigravity
 - Task: Add summaries and descriptions to all 14 endpoints in template.yaml for API Gateway documentation.
 - Review: Just didn't want to add descriptions by hand in the console
+
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/userItem/UserItem.tsx, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/App.tsx, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/navigation/NavigationProvider.tsx
+- Tool: Antigravity
+- Task: Fix route path handling in UserItem, App, and NavigationProvider that caused Safari to treat internal user navigation links as external hostnames.
+- Review: Asked it to fix a known bug, it fixed it. 
