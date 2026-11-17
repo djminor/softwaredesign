@@ -13,6 +13,7 @@ import {
   LoginRequest,
   PagedUserItemRequest,
   PagedUserItemResponse,
+  RegisterRequest,
   User,
 } from "tweeter-shared";
 import { ClientCommunicator } from "./ClientCommunicator";
@@ -184,6 +185,25 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to login");
+    }
+  }
+
+  public async register(
+    request: RegisterRequest
+  ): Promise<[User, AuthToken]> {
+    const response = await this.clientCommunicator.doPost<
+      RegisterRequest,
+      AuthenticateResponse
+    >(request, "/user/register");
+
+    if (response.success && response.user && response.authToken) {
+      return [
+        User.fromDto(response.user)!,
+        AuthToken.fromDto(response.authToken)!,
+      ];
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to register");
     }
   }
 }

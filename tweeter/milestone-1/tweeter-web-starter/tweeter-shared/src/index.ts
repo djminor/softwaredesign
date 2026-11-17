@@ -24,6 +24,7 @@ export type { FollowCountRequest } from "./model/net/request/FollowCountRequest"
 export type { FollowToggleRequest } from "./model/net/request/FollowToggleRequest";
 export type { GetUserRequest } from "./model/net/request/GetUserRequest";
 export type { LoginRequest } from "./model/net/request/LoginRequest";
+export type { RegisterRequest } from "./model/net/request/RegisterRequest";
 
 // Responses
 

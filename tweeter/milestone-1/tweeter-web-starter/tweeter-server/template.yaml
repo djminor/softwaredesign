@@ -217,22 +217,18 @@ Resources:
                 responses: *commonAmazonResponses
               responses: *commonSwaggerResponses
 
-          #
-          # Placeholder endpoints (uncomment and configure as features are implemented):
-          #
-
-          # /user/create:
-          #   post:
-          #     consumes: *commonConsumes
-          #     produces: *commonProduces
-          #     x-amazon-apigateway-integration:
-          #       type: aws
-          #       httpMethod: POST
-          #       uri:
-          #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${userCreateFunction.Arn}/invocations
-          #       requestTemplates: *commonRequestTemplates
-          #       responses: *commonAmazonResponses
-          #     responses: *commonSwaggerResponses
+          /user/register:
+            post:
+              consumes: *commonConsumes
+              produces: *commonProduces
+              x-amazon-apigateway-integration:
+                type: aws
+                httpMethod: POST
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${registerFunction.Arn}/invocations
+                requestTemplates: *commonRequestTemplates
+                responses: *commonAmazonResponses
+              responses: *commonSwaggerResponses
 
   #
   # SQS Queues (Milestone 4B):
@@ -384,23 +380,19 @@ Resources:
             Path: /user/login
             Method: POST
 
-  #
-  # Placeholder Web API Lambda functions (uncomment and configure as features are implemented):
-  #
-
-  # userCreateFunction:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     FunctionName: userCreateFunction
-  #     Handler: handlers/users/UserCreateHandler.userCreateHandler
-  #     Policies: *commonPolicies
-  #     Events:
-  #       PostApi:
-  #         Type: Api
-  #         Properties:
-  #           RestApiId: !Ref tweeterApi
-  #           Path: /user/create
-  #           Method: POST
+  registerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: registerFunction
+      Handler: lambda/user/RegisterLambda.handler
+      Policies: *commonPolicies
+      Events:
+        PostApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref tweeterApi
+            Path: /user/register
+            Method: POST
 
   #
   # SQS Queue Lambda Functions (Milestone 4B):

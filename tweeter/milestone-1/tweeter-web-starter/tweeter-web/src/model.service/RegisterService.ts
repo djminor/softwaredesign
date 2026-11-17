@@ -1,9 +1,12 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { Buffer } from "buffer";
-import { User, AuthToken, FakeData } from "tweeter-shared";
+import { User, AuthToken, RegisterRequest } from "tweeter-shared";
 import { Service } from "./Service";
+import { ServerFacade } from "../network/ServerFacade";
 
-export class RegisterService implements Service{
-    
+export class RegisterService implements Service {
+    private serverFacade = new ServerFacade();
+
     public async register (
         firstName: string,
         lastName: string,
@@ -11,19 +14,19 @@ export class RegisterService implements Service{
         password: string,
         userImageBytes: Uint8Array,
         imageFileExtension: string
-      ): Promise<[User, AuthToken]> {
-        // Not neded now, but will be needed when you make the request to the server in milestone 3
+    ): Promise<[User, AuthToken]> {
         const imageStringBase64: string =
           Buffer.from(userImageBytes).toString("base64");
-    
-        // TODO: Replace with the result of calling the server
-        const user = FakeData.instance.firstUser;
-    
-        if (user === null) {
-          throw new Error("Invalid registration");
-        }
-    
-        return [user, FakeData.instance.authToken];
-      };
 
+        const request: RegisterRequest = {
+            firstName,
+            lastName,
+            alias,
+            password,
+            userImageBytes: imageStringBase64,
+            imageFileExtension,
+        };
+
+        return this.serverFacade.register(request);
+    };
 }
