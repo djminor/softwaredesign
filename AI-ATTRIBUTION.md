@@ -12,3 +12,13 @@
 - Tool: Antigravity
 - Task: Complete Get Followers end-to-end: implement GetFollowersLambda, update server FollowService, add getMoreFollowers in ServerFacade, and connect client FollowService.
 - Review: Simple end-to-end implementation of getFollowers, followed the exact pattern and path of getFollowees.
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml
+- Tool: Antigravity
+- Task: Configure SAM template.yaml with GetFollowees and GetFollowers API endpoints and prepare layer dependencies for SAM deployment.
+- Review: Agent was over-eager and deleted placeholder yaml lines that I wanted for future guidance, hence the next prompt
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml
+- Tool: Antigravity
+- Task: Add commented-out placeholder endpoints, functions, and DynamoDB tables back into template.yaml for future reference.
+- Review: Returned the placeholder endpoints in comment format per my request
