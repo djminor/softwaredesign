@@ -1,5 +1,7 @@
 // AI-assisted: see AI-ATTRIBUTION.md
 import {
+  FollowCountRequest,
+  FollowCountResponse,
   IsFollowerRequest,
   IsFollowerResponse,
   PagedUserItemRequest,
@@ -80,6 +82,22 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to get follower status");
+    }
+  }
+
+  public async getFolloweeCount(
+    request: FollowCountRequest
+  ): Promise<number> {
+    const response = await this.clientCommunicator.doPost<
+      FollowCountRequest,
+      FollowCountResponse
+    >(request, "/followee/count");
+
+    if (response.success) {
+      return response.count;
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get followee count");
     }
   }
 }

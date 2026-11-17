@@ -27,3 +27,8 @@
 - Tool: Antigravity
 - Task: Complete Get Is Follower Status end-to-end: define IsFollowerRequest/Response, implement GetIsFollowerStatusLambda and server FollowService, add endpoint to template.yaml, add method in ServerFacade, and connect client FollowService.
 - Review: Reviewed and it is an end-to-end implementation of getIsFollowerStatus. It didn't touch any unexpected files or do anything that raised any flags for me.
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/FollowCountRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/FollowCountResponse.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/GetFolloweeCountLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts
+- Tool: Antigravity
+- Task: Complete Get Followee Count end-to-end: define FollowCountRequest/Response, implement GetFolloweeCountLambda and server FollowService, add endpoint to template.yaml, add method in ServerFacade, and connect client FollowService.
+- Review: Implemented a request and response for getFolloweeCount, no flags raised when I reviewed
