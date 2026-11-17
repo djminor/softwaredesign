@@ -4,6 +4,8 @@ import {
   FollowCountResponse,
   FollowToggleRequest,
   FollowToggleResponse,
+  GetUserRequest,
+  GetUserResponse,
   IsFollowerRequest,
   IsFollowerResponse,
   PagedUserItemRequest,
@@ -148,6 +150,20 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to unfollow user");
+    }
+  }
+
+  public async getUser(request: GetUserRequest): Promise<User | null> {
+    const response = await this.clientCommunicator.doPost<
+      GetUserRequest,
+      GetUserResponse
+    >(request, "/user/get");
+
+    if (response.success) {
+      return User.fromDto(response.user);
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get user");
     }
   }
 }

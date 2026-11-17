@@ -21,6 +21,7 @@ export type { PagedUserItemRequest } from "./model/net/request/PagedUserItemRequ
 export type { IsFollowerRequest } from "./model/net/request/IsFollowerRequest";
 export type { FollowCountRequest } from "./model/net/request/FollowCountRequest";
 export type { FollowToggleRequest } from "./model/net/request/FollowToggleRequest";
+export type { GetUserRequest } from "./model/net/request/GetUserRequest";
 
 // Responses
 
@@ -29,6 +30,7 @@ export type { PagedUserItemResponse } from "./model/net/response/PagedUserItemRe
 export type { IsFollowerResponse } from "./model/net/response/IsFollowerResponse";
 export type { FollowCountResponse } from "./model/net/response/FollowCountResponse";
 export type { FollowToggleResponse } from "./model/net/response/FollowToggleResponse";
+export type { GetUserResponse } from "./model/net/response/GetUserResponse";
 
 // To be removed 
 

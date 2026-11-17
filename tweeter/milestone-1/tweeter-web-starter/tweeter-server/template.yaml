@@ -191,21 +191,22 @@ Resources:
                 responses: *commonAmazonResponses
               responses: *commonSwaggerResponses
 
+          /user/get:
+            post:
+              consumes: *commonConsumes
+              produces: *commonProduces
+              x-amazon-apigateway-integration:
+                type: aws
+                httpMethod: POST
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getUserFunction.Arn}/invocations
+                requestTemplates: *commonRequestTemplates
+                responses: *commonAmazonResponses
+              responses: *commonSwaggerResponses
+
           #
           # Placeholder endpoints (uncomment and configure as features are implemented):
           #
-          # /user/get:
-          #   post:
-          #     consumes: *commonConsumes
-          #     produces: *commonProduces
-          #     x-amazon-apigateway-integration:
-          #       type: aws
-          #       httpMethod: POST
-          #       uri:
-          #         Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${userGetFunction.Arn}/invocations
-          #       requestTemplates: *commonRequestTemplates
-          #       responses: *commonAmazonResponses
-          #     responses: *commonSwaggerResponses
 
           # /user/create:
           #   post:
@@ -342,22 +343,23 @@ Resources:
             Path: /unfollow
             Method: POST
 
+  getUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: getUserFunction
+      Handler: lambda/user/GetUserLambda.handler
+      Policies: *commonPolicies
+      Events:
+        PostApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref tweeterApi
+            Path: /user/get
+            Method: POST
+
   #
   # Placeholder Web API Lambda functions (uncomment and configure as features are implemented):
   #
-  # userGetFunction:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     FunctionName: userGetFunction
-  #     Handler: handlers/users/UserGetHandler.userGetHandler
-  #     Policies: *commonPolicies
-  #     Events:
-  #       PostApi:
-  #         Type: Api
-  #         Properties:
-  #           RestApiId: !Ref tweeterApi
-  #           Path: /user/get
-  #           Method: POST
 
   # userCreateFunction:
   #   Type: AWS::Serverless::Function
