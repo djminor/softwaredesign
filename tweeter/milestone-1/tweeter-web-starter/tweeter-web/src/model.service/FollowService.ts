@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, User, FakeData, PagedUserItemRequest, IsFollowerRequest, FollowCountRequest } from "tweeter-shared";
+import { AuthToken, User, FakeData, PagedUserItemRequest, IsFollowerRequest, FollowCountRequest, FollowToggleRequest } from "tweeter-shared";
 import { Service } from "./Service";
 import { ServerFacade } from "../network/ServerFacade";
 
@@ -68,5 +68,16 @@ export class FollowService implements Service {
         user: user.dto,
       };
       return this.serverFacade.getFollowerCount(request);
+    };
+
+    public async follow (
+      authToken: AuthToken,
+      userToFollow: User,
+    ): Promise<[followerCount: number, followeeCount: number]> {
+      const request: FollowToggleRequest = {
+        token: authToken.token,
+        user: userToFollow.dto,
+      };
+      return this.serverFacade.follow(request);
     };
 }

@@ -51,4 +51,17 @@ export class FollowService implements Service {
         // TODO: Replace with the result of calling server
         return FakeData.instance.getFollowerCount(user.alias);
     };
+
+    public async follow(
+        token: string,
+        userToFollow: UserDto,
+    ): Promise<[followerCount: number, followeeCount: number]> {
+        // Pause so we can see the follow message. Remove when connected to the server
+        await new Promise((f) => setTimeout(f, 2000));
+
+        const followerCount = await this.getFollowerCount(token, userToFollow);
+        const followeeCount = await this.getFolloweeCount(token, userToFollow);
+
+        return [followerCount, followeeCount];
+    };
 }

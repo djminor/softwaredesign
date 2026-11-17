@@ -37,3 +37,8 @@
 - Tool: Antigravity
 - Task: Complete Get Follower Count end-to-end: define FollowerCountRequest/Response, implement GetFollowerCountLambda and server FollowService, add endpoint to template.yaml, add method in ServerFacade, and connect client FollowService.
 - Review: Implemented a request and response for getFollowerCount, no flags raised when I reviewed
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/FollowToggleRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/FollowToggleResponse.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/FollowLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/presenter/UserInfoPresenter.ts
+- Tool: Antigravity
+- Task: Complete Slice 6 (Follow) end-to-end: define FollowToggleRequest/Response, implement FollowLambda and server FollowService.follow, add endpoint to template.yaml, add follow in ServerFacade, connect client FollowService, and update UserInfoPresenter.
+- Review: Added follow endpoint with request, response, and lambda. I didn't see any issues with the agent's execution

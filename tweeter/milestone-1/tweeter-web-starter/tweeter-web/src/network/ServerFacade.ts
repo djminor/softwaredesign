@@ -2,6 +2,8 @@
 import {
   FollowCountRequest,
   FollowCountResponse,
+  FollowToggleRequest,
+  FollowToggleResponse,
   IsFollowerRequest,
   IsFollowerResponse,
   PagedUserItemRequest,
@@ -114,6 +116,22 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to get follower count");
+    }
+  }
+
+  public async follow(
+    request: FollowToggleRequest
+  ): Promise<[followerCount: number, followeeCount: number]> {
+    const response = await this.clientCommunicator.doPost<
+      FollowToggleRequest,
+      FollowToggleResponse
+    >(request, "/follow");
+
+    if (response.success) {
+      return [response.followerCount, response.followeeCount];
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to follow user");
     }
   }
 }
