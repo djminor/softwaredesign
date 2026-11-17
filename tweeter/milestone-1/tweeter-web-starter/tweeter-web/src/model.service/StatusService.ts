@@ -1,7 +1,11 @@
-import { AuthToken, FakeData, Status, User } from "tweeter-shared";
+// AI-assisted: see AI-ATTRIBUTION.md
+import { AuthToken, FakeData, PagedStatusItemRequest, Status, User } from "tweeter-shared";
 import { Service } from "./Service";
+import { ServerFacade } from "../network/ServerFacade";
 
 export class StatusService implements Service {
+    private serverFacade = new ServerFacade();
+
     public async loadMoreStoryItems (
         authToken: AuthToken,
         userAlias: string,
@@ -11,14 +15,20 @@ export class StatusService implements Service {
         // TODO: Replace with the result of calling server
         return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
       };
+
     public async loadMoreFeedItems (
         authToken: AuthToken,
         userAlias: string,
         pageSize: number,
         lastItem: Status | null
     ): Promise<[Status[], boolean]> {
-        // TODO: Replace with the result of calling server
-        return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
+        const request: PagedStatusItemRequest = {
+            token: authToken.token,
+            userAlias: userAlias,
+            pageSize: pageSize,
+            lastItem: lastItem == null ? null : lastItem.dto,
+        };
+        return this.serverFacade.getMoreFeedItems(request);
     };
 
     public async getUser (

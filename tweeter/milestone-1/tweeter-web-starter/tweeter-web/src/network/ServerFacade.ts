@@ -12,9 +12,12 @@ import {
   IsFollowerResponse,
   LoginRequest,
   LogoutRequest,
+  PagedStatusItemRequest,
+  PagedStatusItemResponse,
   PagedUserItemRequest,
   PagedUserItemResponse,
   RegisterRequest,
+  Status,
   TweeterResponse,
   User,
 } from "tweeter-shared";
@@ -218,6 +221,31 @@ export class ServerFacade {
     if (!response.success) {
       console.error(response);
       throw new Error(response.message ?? "Failed to logout");
+    }
+  }
+
+  public async getMoreFeedItems(
+    request: PagedStatusItemRequest
+  ): Promise<[Status[], boolean]> {
+    const response = await this.clientCommunicator.doPost<
+      PagedStatusItemRequest,
+      PagedStatusItemResponse
+    >(request, "/status/feed");
+
+    const items: Status[] | null =
+      response.success && response.items
+        ? response.items.map((dto) => Status.fromDto(dto) as Status)
+        : null;
+
+    if (response.success) {
+      if (items == null) {
+        throw new Error("No feed items found");
+      } else {
+        return [items, response.hasMore];
+      }
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get feed items");
     }
   }
 }
