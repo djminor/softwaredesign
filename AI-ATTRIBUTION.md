@@ -89,3 +89,9 @@
 - Tool: Antigravity
 - Task: Complete Post Status end-to-end: define PostStatusRequest (reusing TweeterResponse), implement PostStatusLambda and server StatusService.postStatus, add /status/post endpoint to template.yaml, add postStatus in ServerFacade, and connect client StatusService.postStatus.
 - Review: Post status implementation by the agent looks good to me. 
+
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml
+- Tool: Antigravity
+- Task: Add summaries and descriptions to all 14 endpoints in template.yaml for API Gateway documentation.
+- Review: Just didn't want to add descriptions by hand in the console
