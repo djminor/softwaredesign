@@ -1,5 +1,7 @@
 // AI-assisted: see AI-ATTRIBUTION.md
 import {
+  IsFollowerRequest,
+  IsFollowerResponse,
   PagedUserItemRequest,
   PagedUserItemResponse,
   User,
@@ -62,6 +64,22 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to get followers");
+    }
+  }
+
+  public async getIsFollowerStatus(
+    request: IsFollowerRequest
+  ): Promise<boolean> {
+    const response = await this.clientCommunicator.doPost<
+      IsFollowerRequest,
+      IsFollowerResponse
+    >(request, "/follower/status");
+
+    if (response.success) {
+      return response.isFollower;
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get follower status");
     }
   }
 }

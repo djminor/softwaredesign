@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, User, FakeData, PagedUserItemRequest } from "tweeter-shared";
+import { AuthToken, User, FakeData, PagedUserItemRequest, IsFollowerRequest } from "tweeter-shared";
 import { Service } from "./Service";
 import { ServerFacade } from "../network/ServerFacade";
 
@@ -40,8 +40,12 @@ export class FollowService implements Service {
       user: User,
       selectedUser: User,
     ): Promise<boolean> {
-      // TODO: Replace with the result of calling server
-      return FakeData.instance.isFollower();
+      const request: IsFollowerRequest = {
+        token: authToken.token,
+        user: user.dto,
+        selectedUser: selectedUser.dto,
+      };
+      return this.serverFacade.getIsFollowerStatus(request);
     };
 
     public async getFolloweeCount (

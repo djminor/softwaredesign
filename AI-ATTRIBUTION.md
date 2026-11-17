@@ -22,3 +22,8 @@
 - Tool: Antigravity
 - Task: Add commented-out placeholder endpoints, functions, and DynamoDB tables back into template.yaml for future reference.
 - Review: Returned the placeholder endpoints in comment format per my request
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/IsFollowerRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/IsFollowerResponse.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/GetIsFollowerStatusLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts
+- Tool: Antigravity
+- Task: Complete Get Is Follower Status end-to-end: define IsFollowerRequest/Response, implement GetIsFollowerStatusLambda and server FollowService, add endpoint to template.yaml, add method in ServerFacade, and connect client FollowService.
+- Review: Reviewed and it is an end-to-end implementation of getIsFollowerStatus. It didn't touch any unexpected files or do anything that raised any flags for me.
