@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { PagedUserItemRequest, PagedUserItemResponse } from "tweeter-shared";
 import { FollowService } from "../../model/service/FollowService";
 
@@ -7,7 +8,7 @@ export const handler = async (request: PagedUserItemRequest): Promise<PagedUserI
     
     return {
         success: true,
-        message: "",
+        message: null,
         items: items,
         hasMore: hasMore
     }

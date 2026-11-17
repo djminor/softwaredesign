@@ -2,3 +2,8 @@
 - Tool: Antigravity
 - Task: Copy the remaining service classes (RegisterService, StatusService, UserService) from tweeter-web to tweeter-server/src/model/service.
 - Review: Simple copypaste, the agent followed my examples that I'd already completed. 
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/GetFolloweesLambda.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/domain/User.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/PagedUserItemRequest.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/TweeterRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/PagedUserItemResponse.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/response/TweeterResponse.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ClientCommunicator.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts (new file)
+- Tool: Antigravity
+- Task: Complete Get Followees end-to-end: add TweeterRequest/Response base contracts, create ClientCommunicator and ServerFacade in tweeter-web, and connect client FollowService to ServerFacade.
+- Review: Simple end-to-end implementation of getFollowees, matched my expectations. Implemented a ServerFacade that I will need as well
