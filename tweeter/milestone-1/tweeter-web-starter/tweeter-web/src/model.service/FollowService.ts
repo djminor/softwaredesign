@@ -63,7 +63,10 @@ export class FollowService implements Service {
       authToken: AuthToken,
       user: User,
     ): Promise<number> {
-      // TODO: Replace with the result of calling server
-      return FakeData.instance.getFollowerCount(user.alias);
+      const request: FollowCountRequest = {
+        token: authToken.token,
+        user: user.dto,
+      };
+      return this.serverFacade.getFollowerCount(request);
     };
 }

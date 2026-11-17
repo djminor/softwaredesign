@@ -45,8 +45,8 @@ export class FollowService implements Service {
     };
 
     public async getFollowerCount(
-        authToken: AuthToken,
-        user: User,
+        token: string,
+        user: UserDto,
     ): Promise<number> {
         // TODO: Replace with the result of calling server
         return FakeData.instance.getFollowerCount(user.alias);

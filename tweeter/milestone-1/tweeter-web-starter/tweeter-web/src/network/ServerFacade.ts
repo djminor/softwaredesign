@@ -100,4 +100,20 @@ export class ServerFacade {
       throw new Error(response.message ?? "Failed to get followee count");
     }
   }
+
+  public async getFollowerCount(
+    request: FollowCountRequest
+  ): Promise<number> {
+    const response = await this.clientCommunicator.doPost<
+      FollowCountRequest,
+      FollowCountResponse
+    >(request, "/follower/count");
+
+    if (response.success) {
+      return response.count;
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get follower count");
+    }
+  }
 }
