@@ -101,3 +101,8 @@
 - Tool: Antigravity
 - Task: Fix route path handling in UserItem, App, and NavigationProvider that caused Safari to treat internal user navigation links as external hostnames.
 - Review: Asked it to fix a known bug, it fixed it. 
+
+## 2026-11-17: ServerFacade.test.ts and StatusService.test.ts
+- Tool: Antigravity
+- Task: Create integration tests
+- Review: I had AI write the tests for this milestone, but for some reason it didn't properly write an attribution log. I wrote this log myself. 
