@@ -11,9 +11,11 @@ import {
   IsFollowerRequest,
   IsFollowerResponse,
   LoginRequest,
+  LogoutRequest,
   PagedUserItemRequest,
   PagedUserItemResponse,
   RegisterRequest,
+  TweeterResponse,
   User,
 } from "tweeter-shared";
 import { ClientCommunicator } from "./ClientCommunicator";
@@ -204,6 +206,18 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to register");
+    }
+  }
+
+  public async logout(request: LogoutRequest): Promise<void> {
+    const response = await this.clientCommunicator.doPost<
+      LogoutRequest,
+      TweeterResponse
+    >(request, "/user/logout");
+
+    if (!response.success) {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to logout");
     }
   }
 }

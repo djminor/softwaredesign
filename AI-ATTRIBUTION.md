@@ -65,3 +65,9 @@
 - Tool: Antigravity
 - Task: Complete Register end-to-end: define RegisterRequest (reusing AuthenticateResponse), implement RegisterLambda and server RegisterService.register, add /user/register endpoint to template.yaml, add register in ServerFacade, and connect client RegisterService.
 - Review: Noticed that the agent didn't create a new response for this one and pushed back, but it explained it just used the login response, which makes sense. Everything looks good to me. 
+
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/model/net/request/LogoutRequest.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/user/LogoutLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/UserService.ts
+- Tool: Antigravity
+- Task: Complete Logout end-to-end: define LogoutRequest (reusing TweeterResponse), implement LogoutLambda, add /user/logout endpoint to template.yaml, add logout in ServerFacade, and connect client UserService.logout.
+- Review: This one was more obvious why it didn't add a response. I didn't expect it to, so this is great. 

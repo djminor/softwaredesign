@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, User, GetUserRequest } from "tweeter-shared";
+import { AuthToken, User, GetUserRequest, LogoutRequest } from "tweeter-shared";
 import { Service } from "./Service";
 import { ServerFacade } from "../network/ServerFacade";
 
@@ -18,7 +18,9 @@ export class UserService implements Service {
     };
 
     public async logout (authToken: AuthToken): Promise<void> {
-        // Pause so we can see the logging out message. Delete when the call to the server is implemented.
-        await new Promise((res) => setTimeout(res, 1000));
+        const request: LogoutRequest = {
+            token: authToken.token,
+        };
+        return this.serverFacade.logout(request);
     };
 }
