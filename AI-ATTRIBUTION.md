@@ -7,3 +7,8 @@
 - Tool: Antigravity
 - Task: Complete Get Followees end-to-end: add TweeterRequest/Response base contracts, create ClientCommunicator and ServerFacade in tweeter-web, and connect client FollowService to ServerFacade.
 - Review: Simple end-to-end implementation of getFollowees, matched my expectations. Implemented a ServerFacade that I will need as well
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/GetFollowersLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts
+- Tool: Antigravity
+- Task: Complete Get Followers end-to-end: implement GetFollowersLambda, update server FollowService, add getMoreFollowers in ServerFacade, and connect client FollowService.
+- Review: Simple end-to-end implementation of getFollowers, followed the exact pattern and path of getFollowees.
