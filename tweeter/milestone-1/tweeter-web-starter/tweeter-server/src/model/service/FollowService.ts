@@ -64,4 +64,17 @@ export class FollowService implements Service {
 
         return [followerCount, followeeCount];
     };
+
+    public async unfollow(
+        token: string,
+        userToUnfollow: UserDto,
+    ): Promise<[followerCount: number, followeeCount: number]> {
+        // Pause so we can see the unfollow message. Remove when connected to the server
+        await new Promise((f) => setTimeout(f, 2000));
+
+        const followerCount = await this.getFollowerCount(token, userToUnfollow);
+        const followeeCount = await this.getFolloweeCount(token, userToUnfollow);
+
+        return [followerCount, followeeCount];
+    };
 }

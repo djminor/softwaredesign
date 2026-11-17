@@ -80,4 +80,15 @@ export class FollowService implements Service {
       };
       return this.serverFacade.follow(request);
     };
+
+    public async unfollow (
+      authToken: AuthToken,
+      userToUnfollow: User,
+    ): Promise<[followerCount: number, followeeCount: number]> {
+      const request: FollowToggleRequest = {
+        token: authToken.token,
+        user: userToUnfollow.dto,
+      };
+      return this.serverFacade.unfollow(request);
+    };
 }

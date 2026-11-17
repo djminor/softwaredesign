@@ -134,4 +134,20 @@ export class ServerFacade {
       throw new Error(response.message ?? "Failed to follow user");
     }
   }
+
+  public async unfollow(
+    request: FollowToggleRequest
+  ): Promise<[followerCount: number, followeeCount: number]> {
+    const response = await this.clientCommunicator.doPost<
+      FollowToggleRequest,
+      FollowToggleResponse
+    >(request, "/unfollow");
+
+    if (response.success) {
+      return [response.followerCount, response.followeeCount];
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to unfollow user");
+    }
+  }
 }

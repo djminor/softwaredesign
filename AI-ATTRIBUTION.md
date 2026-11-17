@@ -42,3 +42,8 @@
 - Tool: Antigravity
 - Task: Complete Slice 6 (Follow) end-to-end: define FollowToggleRequest/Response, implement FollowLambda and server FollowService.follow, add endpoint to template.yaml, add follow in ServerFacade, connect client FollowService, and update UserInfoPresenter.
 - Review: Added follow endpoint with request, response, and lambda. I didn't see any issues with the agent's execution
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/follow/UnfollowLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/FollowService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/presenter/UserInfoPresenter.ts
+- Tool: Antigravity
+- Task: Complete Unfollow end-to-end: implement UnfollowLambda and server FollowService.unfollow, add endpoint to template.yaml, add unfollow in ServerFacade, connect client FollowService, and update UserInfoPresenter.
+- Review: Agent's execution of adding response, request, and lambda for unfollow didn't raise any flags for me
