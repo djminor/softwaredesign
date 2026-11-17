@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, User, FakeData, PagedUserItemRequest, IsFollowerRequest, FollowCountRequest, FollowToggleRequest } from "tweeter-shared";
+import { AuthToken, User, PagedUserItemRequest, IsFollowerRequest, FollowCountRequest, FollowToggleRequest } from "tweeter-shared";
 import { Service } from "./Service";
 import { ServerFacade } from "../network/ServerFacade";
 

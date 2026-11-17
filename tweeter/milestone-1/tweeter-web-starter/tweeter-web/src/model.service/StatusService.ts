@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, FakeData, PagedStatusItemRequest, Status, User } from "tweeter-shared";
+import { AuthToken, PagedStatusItemRequest, PostStatusRequest, Status, User } from "tweeter-shared";
 import { Service } from "./Service";
 import { ServerFacade } from "../network/ServerFacade";
 
@@ -40,17 +40,17 @@ export class StatusService implements Service {
             authToken: AuthToken,
             alias: string
           ): Promise<User | null> {
-            // TODO: Replace with the result of calling server
-            return FakeData.instance.findUserByAlias(alias);
+            return this.serverFacade.getUser({ token: authToken.token, alias });
     };
 
     public async postStatus (
     authToken: AuthToken,
     newStatus: Status,
   ): Promise<void> {
-    // Pause so we can see the logging out message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
-
-    // TODO: Call the server to post the status
+    const request: PostStatusRequest = {
+      token: authToken.token,
+      newStatus: newStatus.dto,
+    };
+    return this.serverFacade.postStatus(request);
   };
 }

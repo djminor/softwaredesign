@@ -28,6 +28,7 @@ export type { GetUserRequest } from "./model/net/request/GetUserRequest";
 export type { LoginRequest } from "./model/net/request/LoginRequest";
 export type { RegisterRequest } from "./model/net/request/RegisterRequest";
 export type { LogoutRequest } from "./model/net/request/LogoutRequest";
+export type { PostStatusRequest } from "./model/net/request/PostStatusRequest";
 
 // Responses
 

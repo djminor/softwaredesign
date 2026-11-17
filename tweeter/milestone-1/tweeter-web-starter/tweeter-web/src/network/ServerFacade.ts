@@ -16,6 +16,7 @@ import {
   PagedStatusItemResponse,
   PagedUserItemRequest,
   PagedUserItemResponse,
+  PostStatusRequest,
   RegisterRequest,
   Status,
   TweeterResponse,
@@ -271,6 +272,18 @@ export class ServerFacade {
     } else {
       console.error(response);
       throw new Error(response.message ?? "Failed to get story items");
+    }
+  }
+
+  public async postStatus(request: PostStatusRequest): Promise<void> {
+    const response = await this.clientCommunicator.doPost<
+      PostStatusRequest,
+      TweeterResponse
+    >(request, "/status/post");
+
+    if (!response.success) {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to post status");
     }
   }
 }
