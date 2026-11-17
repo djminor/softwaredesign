@@ -256,6 +256,19 @@ Resources:
                 responses: *commonAmazonResponses
               responses: *commonSwaggerResponses
 
+          /status/story:
+            post:
+              consumes: *commonConsumes
+              produces: *commonProduces
+              x-amazon-apigateway-integration:
+                type: aws
+                httpMethod: POST
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getStoryFunction.Arn}/invocations
+                requestTemplates: *commonRequestTemplates
+                responses: *commonAmazonResponses
+              responses: *commonSwaggerResponses
+
   #
   # SQS Queues (Milestone 4B):
   #
@@ -446,6 +459,20 @@ Resources:
           Properties:
             RestApiId: !Ref tweeterApi
             Path: /status/feed
+            Method: POST
+
+  getStoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: getStoryFunction
+      Handler: lambda/status/GetStoryLambda.handler
+      Policies: *commonPolicies
+      Events:
+        PostApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref tweeterApi
+            Path: /status/story
             Method: POST
 
   #

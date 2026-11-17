@@ -248,4 +248,29 @@ export class ServerFacade {
       throw new Error(response.message ?? "Failed to get feed items");
     }
   }
+
+  public async getMoreStoryItems(
+    request: PagedStatusItemRequest
+  ): Promise<[Status[], boolean]> {
+    const response = await this.clientCommunicator.doPost<
+      PagedStatusItemRequest,
+      PagedStatusItemResponse
+    >(request, "/status/story");
+
+    const items: Status[] | null =
+      response.success && response.items
+        ? response.items.map((dto) => Status.fromDto(dto) as Status)
+        : null;
+
+    if (response.success) {
+      if (items == null) {
+        throw new Error("No story items found");
+      } else {
+        return [items, response.hasMore];
+      }
+    } else {
+      console.error(response);
+      throw new Error(response.message ?? "Failed to get story items");
+    }
+  }
 }

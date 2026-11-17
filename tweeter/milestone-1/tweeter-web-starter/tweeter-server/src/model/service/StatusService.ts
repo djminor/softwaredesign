@@ -4,13 +4,17 @@ import { Service } from "./Service";
 
 export class StatusService implements Service {
     public async loadMoreStoryItems(
-        authToken: AuthToken,
+        token: string,
         userAlias: string,
         pageSize: number,
-        lastItem: Status | null
-    ): Promise<[Status[], boolean]> {
-        // TODO: Replace with the result of calling server
-        return FakeData.instance.getPageOfStatuses(lastItem, pageSize);
+        lastItem: StatusDto | null
+    ): Promise<[StatusDto[], boolean]> {
+        const [items, hasMore] = FakeData.instance.getPageOfStatuses(
+            Status.fromDto(lastItem),
+            pageSize
+        );
+        const dtos = items.map((status) => status.dto);
+        return [dtos, hasMore];
     };
 
     public async loadMoreFeedItems(

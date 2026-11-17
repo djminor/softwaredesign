@@ -77,3 +77,9 @@
 - Tool: Antigravity
 - Task: Complete Load More Feed Items end-to-end: define StatusDto, PagedStatusItemRequest, PagedStatusItemResponse, add Status DTO helpers, implement GetFeedLambda and server StatusService.loadMoreFeedItems, add /status/feed endpoint to template.yaml, add getMoreFeedItems in ServerFacade, and connect client StatusService.loadMoreFeedItems.
 - Review: This was a bigger change in the hands of the agent, but it also essentially just mirrors the get followers task, so reviewing wasn't completely foreign to me. Everything looked in order. 
+
+
+## 2026-11-17: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/StatusService.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/lambda/status/GetStoryLambda.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/model.service/StatusService.ts
+- Tool: Antigravity
+- Task: Complete Load More Story Items end-to-end: implement GetStoryLambda and server StatusService.loadMoreStoryItems (reusing PagedStatusItemRequest and PagedStatusItemResponse), add /status/story endpoint to template.yaml, add getMoreStoryItems in ServerFacade, and connect client StatusService.loadMoreStoryItems.
+- Review: Essentially the sister feature to get more feed items, so it looks like the agent did well to me. 
