@@ -11,4 +11,5 @@ export * from "./dynamo/DynamoClient";
 export * from "./dynamo/DynamoDaoFactory";
 export * from "./dynamo/DynamoUserDao";
 export * from "./dynamo/DynamoAuthTokenDao";
+export * from "./dynamo/DynamoFollowDao";
 export * from "./s3/S3StorageDao";

@@ -165,3 +165,9 @@
 - Tool: Antigravity
 - Task: Implement Logout and secure GetUser in UserService using UserDao and AuthorizationService, removing FakeData.
 - Review: Agent did well implementing logout
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoFollowDao.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoDaoFactory.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/index.ts
+- Tool: Antigravity
+- Task: Implement DynamoFollowDao with primary key and GSI queries for follow relationships, pagination, and follower retrieval, and wire it into DynamoDaoFactory.
+- Review: Agent did a good job adding new DAO for following
