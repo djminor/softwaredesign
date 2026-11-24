@@ -147,3 +147,9 @@
 - Tool: Antigravity
 - Task: Integrate DaoFactory, bcryptjs password hashing, S3 profile image upload, and persistent AuthToken in RegisterService, removing FakeData.
 - Review: Ported register service over to use DAO, agent did well
+
+
+## 2026-11-23: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/LoginService.ts
+- Tool: Antigravity
+- Task: Implement secure login in LoginService using UserDao, bcryptjs password verification, and persistent AuthTokenDao, removing FakeData.
+- Review: The agent did well porting login over to DAO
