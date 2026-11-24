@@ -261,3 +261,9 @@
 - Tool: Antigravity
 - Task: Set displayErrorMessage toast duration to 5000ms instead of 0 so error toasts (including login errors) auto-expire.
 - Review: This fixed another small bug I found
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/presenter/UserAuthPresenter.ts
+- Tool: Antigravity
+- Task: Reset isLoading to false in a finally block inside UserAuthPresenter.doLoginOrRegister so failed login/register attempts do not leave the submit button stuck in a loading spinner on subsequent edits.
+- Review: Fix worked!

@@ -95,22 +95,25 @@ export abstract class UserAuthPresenter extends Presenter<UserAuthView> {
     }
 
     public async doLoginOrRegister(updateUserInfo: (currentUser: User, displayedUser: User | null, authToken: AuthToken, remember: boolean) => void, navigate: (url: string) => void) {
-        this.doFailureReportingOperation(async () => {
-            
+        await this.doFailureReportingOperation(async () => {
             if (!this.isValid()) {
-            return;
+                return;
             }
 
-            this.isLoading = true;
+            try {
+                this.isLoading = true;
 
-            const [user, authToken] = await this.doAuth();
+                const [user, authToken] = await this.doAuth();
 
-            updateUserInfo(user, user, authToken, this.rememberMe);
+                updateUserInfo(user, user, authToken, this.rememberMe);
 
-            if (!!this.originalUrl) {
-            navigate(this.originalUrl);
-            } else {
-            navigate(`/feed/${user.alias}`);
+                if (!!this.originalUrl) {
+                    navigate(this.originalUrl);
+                } else {
+                    navigate(`/feed/${user.alias}`);
+                }
+            } finally {
+                this.isLoading = false;
             }
         }, this.authOperationDescription);
     };
