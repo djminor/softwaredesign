@@ -106,3 +106,9 @@
 - Tool: Antigravity
 - Task: Create integration tests
 - Review: I had AI write the tests for this milestone, but for some reason it didn't properly write an attribution log. I wrote this log myself. 
+
+
+## 2026-11-23: tweeter/milestone-1/tweeter-web-starter/tweeter-server/package.json, tweeter/milestone-1/tweeter-web-starter/tweeter-server/package-lock.json, tweeter/milestone-1/tweeter-web-starter/tweeter-server/template.yaml
+- Tool: Antigravity
+- Task: Install AWS SDK and bcryptjs dependencies for tweeter-server and its Lambda layer, and configure DynamoDB tables in template.yaml with free-tier provisioned capacity.
+- Review: Agent followed my instructions well and it doesn't look like I need to change anything!
