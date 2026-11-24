@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import "./Register.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { ChangeEvent, useRef, useState } from "react";
@@ -49,7 +50,7 @@ const Register = (props: Props) => {
 
   const registerOnEnter = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key == "Enter" && !checkSubmitButtonStatus()) {
-      presenterRef.current!.doLoginOrRegister(updateUserInfo, navigate)
+      doRegister();
     }
   };
 

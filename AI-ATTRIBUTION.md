@@ -237,3 +237,9 @@
 - Tool: Antigravity
 - Task: Create DynamoDB seed script populating 22 users and 12 followers, 12 followees, 12 story items, and 12 feed items for @allen, then remove FakeData.ts and its export from tweeter-shared.
 - Review: It looks good to me when I actually boot up the app! 
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/authentication/login/Login.tsx, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/authentication/register/Register.tsx, tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/presenter/UserAuthPresenter.ts
+- Tool: Antigravity
+- Task: Fix Login.tsx to pass alias and password to the presenter before calling doLoginOrRegister, fix Register.tsx registerOnEnter to call doRegister, and fix UserAuthPresenter.lastName setter assignment.
+- Review: Fixed the bug! It works

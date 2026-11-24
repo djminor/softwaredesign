@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import "./Login.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRef, useState } from "react";
@@ -36,7 +37,9 @@ const Login = (props: Props) => {
   };
 
   const doLogin = async () => {
-    presenterRef.current!.doLoginOrRegister(updateUserInfo, navigate)
+    presenterRef.current!.alias = alias;
+    presenterRef.current!.password = password;
+    presenterRef.current!.doLoginOrRegister(updateUserInfo, navigate);
   };
 
   const inputFieldFactory = () => {

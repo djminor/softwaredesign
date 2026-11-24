@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { User, AuthToken } from "tweeter-shared"
 import { Presenter, View } from "./Presenter"
 
@@ -34,7 +35,7 @@ export abstract class UserAuthPresenter extends Presenter<UserAuthView> {
     }
 
     public set lastName(lastName: string) {
-        this._lastName
+        this._lastName = lastName
     }
 
     public get imageBytes() {
