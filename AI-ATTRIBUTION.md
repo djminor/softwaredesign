@@ -171,3 +171,9 @@
 - Tool: Antigravity
 - Task: Implement DynamoFollowDao with primary key and GSI queries for follow relationships, pagination, and follower retrieval, and wire it into DynamoDaoFactory.
 - Review: Agent did a good job adding new DAO for following
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts
+- Tool: Antigravity
+- Task: Wire loadMoreFollowees and loadMoreFollowers in FollowService to DynamoFollowDao, UserDao, and AuthorizationService.
+- Review: Agent did a good job wiring followService into the DAO
