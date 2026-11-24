@@ -1,36 +1,14 @@
 // AI-assisted: see AI-ATTRIBUTION.md
 import { DaoFactory } from "../DaoFactory";
-import { UserDao, UserRecord } from "../UserDao";
+import { UserDao } from "../UserDao";
 import { AuthTokenDao, AuthTokenRecord } from "../AuthTokenDao";
 import { FollowDao, FollowRecord } from "../FollowDao";
 import { StoryDao, StatusRecord } from "../StoryDao";
 import { FeedDao } from "../FeedDao";
 import { S3Dao } from "../S3Dao";
 import { S3StorageDao } from "../s3/S3StorageDao";
+import { DynamoUserDao } from "./DynamoUserDao";
 import { DataPage } from "../DataPage";
-
-// Initial skeleton implementations (will be fully implemented in upcoming commits)
-class DynamoUserDaoStub implements UserDao {
-  async getUser(alias: string): Promise<UserRecord | null> {
-    throw new Error("Not implemented yet");
-  }
-  async putUser(user: UserRecord): Promise<void> {
-    throw new Error("Not implemented yet");
-  }
-  async updateFollowCounts(
-    alias: string,
-    followerCountDelta: number,
-    followeeCountDelta: number
-  ): Promise<[followerCount: number, followeeCount: number]> {
-    throw new Error("Not implemented yet");
-  }
-  async getFollowerCount(alias: string): Promise<number> {
-    throw new Error("Not implemented yet");
-  }
-  async getFolloweeCount(alias: string): Promise<number> {
-    throw new Error("Not implemented yet");
-  }
-}
 
 class DynamoAuthTokenDaoStub implements AuthTokenDao {
   async putToken(tokenRecord: AuthTokenRecord): Promise<void> {
@@ -115,7 +93,7 @@ class DynamoFeedDaoStub implements FeedDao {
 }
 
 export class DynamoDaoFactory implements DaoFactory {
-  private userDao: UserDao = new DynamoUserDaoStub();
+  private userDao: UserDao = new DynamoUserDao();
   private authTokenDao: AuthTokenDao = new DynamoAuthTokenDaoStub();
   private followDao: FollowDao = new DynamoFollowDaoStub();
   private storyDao: StoryDao = new DynamoStoryDaoStub();

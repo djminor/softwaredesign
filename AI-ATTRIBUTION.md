@@ -129,3 +129,9 @@
 - Tool: Antigravity
 - Task: Implement S3StorageDao using @aws-sdk/client-s3 for profile picture uploads, and wire it into DynamoDaoFactory.
 - Review: I had the agent implement the S3 DAO which all looks good to me!
+
+
+## 2026-11-23: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoUserDao.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoDaoFactory.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/index.ts
+- Tool: Antigravity
+- Task: Implement DynamoUserDao for DynamoDB user persistence, retrieval, and atomic follow counter updates, and wire it into DynamoDaoFactory.
+- Review: Agent's implementation looks good to me. 
