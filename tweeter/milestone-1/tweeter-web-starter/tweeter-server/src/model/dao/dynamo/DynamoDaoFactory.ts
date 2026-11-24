@@ -10,20 +10,8 @@ import { S3StorageDao } from "../s3/S3StorageDao";
 import { DynamoUserDao } from "./DynamoUserDao";
 import { DynamoAuthTokenDao } from "./DynamoAuthTokenDao";
 import { DynamoFollowDao } from "./DynamoFollowDao";
+import { DynamoStoryDao } from "./DynamoStoryDao";
 import { DataPage } from "../DataPage";
-
-class DynamoStoryDaoStub implements StoryDao {
-  async putStoryItem(status: StatusRecord): Promise<void> {
-    throw new Error("Not implemented yet");
-  }
-  async getPageOfStory(
-    senderAlias: string,
-    pageSize: number,
-    lastTimestamp: number | undefined
-  ): Promise<DataPage<StatusRecord>> {
-    throw new Error("Not implemented yet");
-  }
-}
 
 class DynamoFeedDaoStub implements FeedDao {
   async putFeedItem(receiverAlias: string, status: StatusRecord): Promise<void> {
@@ -48,7 +36,7 @@ export class DynamoDaoFactory implements DaoFactory {
   private userDao: UserDao = new DynamoUserDao();
   private authTokenDao: AuthTokenDao = new DynamoAuthTokenDao();
   private followDao: FollowDao = new DynamoFollowDao();
-  private storyDao: StoryDao = new DynamoStoryDaoStub();
+  private storyDao: StoryDao = new DynamoStoryDao();
   private feedDao: FeedDao = new DynamoFeedDaoStub();
   private s3Dao: S3Dao = new S3StorageDao();
 
