@@ -9,3 +9,4 @@ export * from "./S3Dao";
 export * from "./DaoFactory";
 export * from "./dynamo/DynamoClient";
 export * from "./dynamo/DynamoDaoFactory";
+export * from "./s3/S3StorageDao";

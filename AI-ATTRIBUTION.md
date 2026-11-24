@@ -123,3 +123,9 @@
 - Tool: Antigravity
 - Task: Define DaoFactory interface, implement DynamoClient singleton, and scaffold DynamoDaoFactory.
 - Review: Agent did a good job creating a factory to make the DAO layer more flexible and usable. 
+
+
+## 2026-11-23: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/s3/S3StorageDao.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoDaoFactory.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/index.ts
+- Tool: Antigravity
+- Task: Implement S3StorageDao using @aws-sdk/client-s3 for profile picture uploads, and wire it into DynamoDaoFactory.
+- Review: I had the agent implement the S3 DAO which all looks good to me!

@@ -6,6 +6,7 @@ import { FollowDao, FollowRecord } from "../FollowDao";
 import { StoryDao, StatusRecord } from "../StoryDao";
 import { FeedDao } from "../FeedDao";
 import { S3Dao } from "../S3Dao";
+import { S3StorageDao } from "../s3/S3StorageDao";
 import { DataPage } from "../DataPage";
 
 // Initial skeleton implementations (will be fully implemented in upcoming commits)
@@ -113,22 +114,13 @@ class DynamoFeedDaoStub implements FeedDao {
   }
 }
 
-class S3DaoStub implements S3Dao {
-  async putImage(
-    fileName: string,
-    imageStringBase64Encoded: string
-  ): Promise<string> {
-    throw new Error("Not implemented yet");
-  }
-}
-
 export class DynamoDaoFactory implements DaoFactory {
   private userDao: UserDao = new DynamoUserDaoStub();
   private authTokenDao: AuthTokenDao = new DynamoAuthTokenDaoStub();
   private followDao: FollowDao = new DynamoFollowDaoStub();
   private storyDao: StoryDao = new DynamoStoryDaoStub();
   private feedDao: FeedDao = new DynamoFeedDaoStub();
-  private s3Dao: S3Dao = new S3DaoStub();
+  private s3Dao: S3Dao = new S3StorageDao();
 
   public getUserDao(): UserDao {
     return this.userDao;
