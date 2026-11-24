@@ -195,3 +195,9 @@
 - Tool: Antigravity
 - Task: Implement DynamoStoryDao for user story persistence and reverse-chronological pagination in DynamoDB, and wire it into DynamoDaoFactory.
 - Review: New DAO for story persistence, agent did well
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoFeedDao.ts (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/dynamo/DynamoDaoFactory.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/index.ts
+- Tool: Antigravity
+- Task: Implement DynamoFeedDao for pre-computed follower feeds with 25-item chunked batch writes, unprocessed item retries, and reverse-chronological pagination, and wire it into DynamoDaoFactory.
+- Review: New DAO for feed, agent did well
