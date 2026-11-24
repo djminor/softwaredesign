@@ -177,3 +177,9 @@
 - Tool: Antigravity
 - Task: Wire loadMoreFollowees and loadMoreFollowers in FollowService to DynamoFollowDao, UserDao, and AuthorizationService.
 - Review: Agent did a good job wiring followService into the DAO
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/FollowService.ts
+- Tool: Antigravity
+- Task: Implement follow and unfollow in FollowService with persistent follow records and atomic counter updates on UserDao.
+- Review: Agent did a good job adding follow and unfollow to the FollowService

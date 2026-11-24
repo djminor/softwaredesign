@@ -141,25 +141,88 @@ export class FollowService implements Service {
     token: string,
     userToFollow: UserDto
   ): Promise<[followerCount: number, followeeCount: number]> {
-    // Pause so we can see the follow message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
+    if (!userToFollow || !userToFollow.alias) {
+      throw new Error("[Bad Request] Missing user to follow");
+    }
 
-    const followerCount = await this.getFollowerCount(token, userToFollow);
-    const followeeCount = await this.getFolloweeCount(token, userToFollow);
+    const authRecord = await this.authService.validateToken(token);
+    if (authRecord.alias === userToFollow.alias) {
+      throw new Error("[Bad Request] Cannot follow yourself");
+    }
 
-    return [followerCount, followeeCount];
+    const followDao = this.daoFactory.getFollowDao();
+    const userDao = this.daoFactory.getUserDao();
+
+    const alreadyFollowing = await followDao.isFollower(
+      authRecord.alias,
+      userToFollow.alias
+    );
+
+    if (!alreadyFollowing) {
+      await followDao.putFollow({
+        follower_handle: authRecord.alias,
+        followee_handle: userToFollow.alias,
+        follower_name: undefined,
+        followee_name: `${userToFollow.firstName} ${userToFollow.lastName}`,
+      });
+
+      // Increment follower's followee count
+      await userDao.updateFollowCounts(authRecord.alias, 0, 1);
+
+      // Increment followee's follower count
+      const [followerCount, followeeCount] = await userDao.updateFollowCounts(
+        userToFollow.alias,
+        1,
+        0
+      );
+
+      return [Math.max(0, followerCount), Math.max(0, followeeCount)];
+    }
+
+    const followerCount = await userDao.getFollowerCount(userToFollow.alias);
+    const followeeCount = await userDao.getFolloweeCount(userToFollow.alias);
+    return [Math.max(0, followerCount), Math.max(0, followeeCount)];
   }
 
   public async unfollow(
     token: string,
     userToUnfollow: UserDto
   ): Promise<[followerCount: number, followeeCount: number]> {
-    // Pause so we can see the unfollow message. Remove when connected to the server
-    await new Promise((f) => setTimeout(f, 2000));
+    if (!userToUnfollow || !userToUnfollow.alias) {
+      throw new Error("[Bad Request] Missing user to unfollow");
+    }
 
-    const followerCount = await this.getFollowerCount(token, userToUnfollow);
-    const followeeCount = await this.getFolloweeCount(token, userToUnfollow);
+    const authRecord = await this.authService.validateToken(token);
+    if (authRecord.alias === userToUnfollow.alias) {
+      throw new Error("[Bad Request] Cannot unfollow yourself");
+    }
 
-    return [followerCount, followeeCount];
+    const followDao = this.daoFactory.getFollowDao();
+    const userDao = this.daoFactory.getUserDao();
+
+    const isFollowing = await followDao.isFollower(
+      authRecord.alias,
+      userToUnfollow.alias
+    );
+
+    if (isFollowing) {
+      await followDao.deleteFollow(authRecord.alias, userToUnfollow.alias);
+
+      // Decrement follower's followee count
+      await userDao.updateFollowCounts(authRecord.alias, 0, -1);
+
+      // Decrement followee's follower count
+      const [followerCount, followeeCount] = await userDao.updateFollowCounts(
+        userToUnfollow.alias,
+        -1,
+        0
+      );
+
+      return [Math.max(0, followerCount), Math.max(0, followeeCount)];
+    }
+
+    const followerCount = await userDao.getFollowerCount(userToUnfollow.alias);
+    const followeeCount = await userDao.getFolloweeCount(userToUnfollow.alias);
+    return [Math.max(0, followerCount), Math.max(0, followeeCount)];
   }
 }
