@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import "./PostStatus.css";
 import { useState } from "react";
 import { useMessageActions } from "../hooks/MessageHooks";
@@ -18,7 +19,7 @@ const PostStatus = (props: Props) => {
   const listener: PostStatusView = {
     displayErrorMessage: (message: string) => displayErrorMessage(message),
     displayInfoMessage: (message: string, duration?: number) => {
-      return displayInfoMessage(message, 0);
+      return displayInfoMessage(message, duration ?? 0);
     },
     deleteMessage: (messageId: string) => deleteMessage(messageId),
     clearPost: () => setPost(""),

@@ -243,3 +243,15 @@
 - Tool: Antigravity
 - Task: Fix Login.tsx to pass alias and password to the presenter before calling doLoginOrRegister, fix Register.tsx registerOnEnter to call doRegister, and fix UserAuthPresenter.lastName setter assignment.
 - Review: Fixed the bug! It works
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/postStatus/PostStatus.tsx
+- Tool: Antigravity
+- Task: Forward the duration parameter to displayInfoMessage in PostStatus.tsx instead of hardcoding 0 so the "Status posted!" toast auto-expires.
+- Review: Fixed the bug
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/appNavbar/AppNavbar.tsx
+- Tool: Antigravity
+- Task: Forward duration ?? 0 in AppNavbar.tsx displayInfoMessage and fix displayErrorMessage recursive self-call by delegating to useMessageActions().
+- Review: Found a few other instances of that same bug

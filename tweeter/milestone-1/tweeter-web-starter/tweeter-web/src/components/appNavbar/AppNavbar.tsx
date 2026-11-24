@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import "./AppNavbar.css";
 import { useRef } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
@@ -12,11 +13,11 @@ const AppNavbar = () => {
   const { authToken, displayedUser } = useUserInfo();
   const { clearUserInfo } = useUserActions();
   const navigate = useNavigate();
-  const { displayInfoMessage, deleteMessage } = useMessageActions();
+  const { displayInfoMessage, displayErrorMessage, deleteMessage } = useMessageActions();
 
   const listener: AppNavbarView = {
     displayInfoMessage: (message: string, duration?: number) => {
-      return displayInfoMessage(message, 0);
+      return displayInfoMessage(message, duration ?? 0);
     },
     deleteMessage: (toastId: string) => {
       deleteMessage(toastId);
@@ -27,8 +28,8 @@ const AppNavbar = () => {
     navigateToLogin: () => {
       navigate("/login");
     },
-    displayErrorMessage: function (message: string, duration?: number): void {
-      return this.displayErrorMessage(message, 0);
+    displayErrorMessage: (message: string) => {
+      displayErrorMessage(message);
     }
   };
 
