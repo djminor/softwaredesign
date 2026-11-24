@@ -141,3 +141,9 @@
 - Tool: Antigravity
 - Task: Implement DynamoAuthTokenDao for session token persistence, retrieval, sliding expiration timestamp updates, and deletion in DynamoDB, and wire it into DynamoDaoFactory.
 - Review: Looks like the agent performed this task well
+
+
+## 2026-11-23: tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/service/RegisterService.ts
+- Tool: Antigravity
+- Task: Integrate DaoFactory, bcryptjs password hashing, S3 profile image upload, and persistent AuthToken in RegisterService, removing FakeData.
+- Review: Ported register service over to use DAO, agent did well
