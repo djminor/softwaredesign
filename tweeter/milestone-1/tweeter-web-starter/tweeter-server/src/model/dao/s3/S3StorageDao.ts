@@ -2,7 +2,6 @@
 import {
   S3Client,
   PutObjectCommand,
-  ObjectCannedACL,
 } from "@aws-sdk/client-s3";
 import { S3Dao } from "../S3Dao";
 
@@ -40,7 +39,6 @@ export class S3StorageDao implements S3Dao {
       Key: "image/" + fileName,
       Body: decodedImageBuffer,
       ContentType: "image/png",
-      ACL: ObjectCannedACL.public_read,
     };
 
     const command = new PutObjectCommand(s3Params);

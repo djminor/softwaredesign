@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { AuthToken, User } from "tweeter-shared"
 import { anything, instance, mock, spy, verify, when } from '@typestrong/ts-mockito'
 import { PostStatusPresenter, PostStatusView } from "../../../src/presenter/PostStatusPresenter"
@@ -51,6 +52,6 @@ describe("PostStatusPresenter ", () => {
         verify(mockPostStatusPresenterView.displayErrorMessage(`Failed to post the status because of exception: ${error}`)).once()
         verify(mockPostStatusPresenterView.deleteMessage(anything())).once()
         verify(mockPostStatusPresenterView.clearPost()).never()
-        verify(mockPostStatusPresenterView.displayInfoMessage(anything(), 0)).never()
+        verify(mockPostStatusPresenterView.displayInfoMessage("Status posted!", 2000)).never()
     })
 })

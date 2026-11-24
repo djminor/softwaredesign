@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { MemoryRouter } from "react-router-dom"
 import { render, screen } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
@@ -12,8 +13,8 @@ import { AuthToken, User } from "tweeter-shared";
 
 library.add(fab);
 
-jest.mock("../../src/components/hooks/UserHooks.ts", () => ({
-  ...jest.requireActual("../../src/components/hooks/UserHooks.ts"),
+jest.mock("../../../../../src/components/hooks/UserHooks", () => ({
+  ...jest.requireActual("../../../../../src/components/hooks/UserHooks"),
   __esModule: true,
   useUserInfo: jest.fn(),
 }));

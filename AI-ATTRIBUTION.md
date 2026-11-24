@@ -213,3 +213,21 @@
 - Tool: Antigravity
 - Task: Wire loadMoreStoryItems and loadMoreFeedItems in StatusService to DynamoStoryDao and DynamoFeedDao, eliminating all FakeData from tweeter-server.
 - Review: No more fakedata! We're keeping the actual file for reference when we seed the DB but the agent did well. 
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/test/network/ServerFacade.test.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-web/test/service/StatusService.test.ts
+- Tool: Antigravity
+- Task: Update integration test suites in ServerFacade.test.ts and StatusService.test.ts to test live DynamoDB and S3 data layer, password verification error handling, follow counts, and story/feed fan-out.
+- Review: Tests failed, so I'm asking agent to repair them (other tests from before failed as well)
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/test/__mocks__/components/authentication/login/PostStatus.test.tsx, tweeter/milestone-1/tweeter-web-starter/tweeter-web/test/__mocks__/presenter/PostStatusPresenter.test.ts
+- Tool: Antigravity
+- Task: Fix relative module mock path in PostStatus.test.tsx and fix status posted verification in PostStatusPresenter.test.ts.
+- Review: Still failing 2 of 6 unit test suites
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/network/ServerFacade.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-server/src/model/dao/s3/S3StorageDao.ts
+- Tool: Antigravity
+- Task: Update ServerFacade SERVER_URL to use the deployed /prod stage and remove ACL parameter from S3StorageDao PutObjectCommand so uploads succeed with BucketOwnerEnforced.
+- Review: After deploying server, there were a few changes that needed to be made. Agent did well locating and fixing them
