@@ -6,3 +6,6 @@ export * from "./FollowDao";
 export * from "./StoryDao";
 export * from "./FeedDao";
 export * from "./S3Dao";
+export * from "./DaoFactory";
+export * from "./dynamo/DynamoClient";
+export * from "./dynamo/DynamoDaoFactory";
