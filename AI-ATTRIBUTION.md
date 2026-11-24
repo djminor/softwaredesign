@@ -231,3 +231,9 @@
 - Tool: Antigravity
 - Task: Update ServerFacade SERVER_URL to use the deployed /prod stage and remove ACL parameter from S3StorageDao PutObjectCommand so uploads succeed with BucketOwnerEnforced.
 - Review: After deploying server, there were a few changes that needed to be made. Agent did well locating and fixing them
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-server/scripts/seed.js (new file), tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/index.ts, tweeter/milestone-1/tweeter-web-starter/tweeter-shared/src/util/FakeData.ts (deleted)
+- Tool: Antigravity
+- Task: Create DynamoDB seed script populating 22 users and 12 followers, 12 followees, 12 story items, and 12 feed items for @allen, then remove FakeData.ts and its export from tweeter-shared.
+- Review: It looks good to me when I actually boot up the app! 

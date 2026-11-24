@@ -40,7 +40,3 @@ export type { FollowCountResponse } from "./model/net/response/FollowCountRespon
 export type { FollowToggleResponse } from "./model/net/response/FollowToggleResponse";
 export type { GetUserResponse } from "./model/net/response/GetUserResponse";
 export type { AuthenticateResponse } from "./model/net/response/AuthenticateResponse";
-
-// To be removed 
-
-export { FakeData } from "./util/FakeData";
