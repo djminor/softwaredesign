@@ -8,22 +8,8 @@ import { FeedDao } from "../FeedDao";
 import { S3Dao } from "../S3Dao";
 import { S3StorageDao } from "../s3/S3StorageDao";
 import { DynamoUserDao } from "./DynamoUserDao";
+import { DynamoAuthTokenDao } from "./DynamoAuthTokenDao";
 import { DataPage } from "../DataPage";
-
-class DynamoAuthTokenDaoStub implements AuthTokenDao {
-  async putToken(tokenRecord: AuthTokenRecord): Promise<void> {
-    throw new Error("Not implemented yet");
-  }
-  async getToken(token: string): Promise<AuthTokenRecord | null> {
-    throw new Error("Not implemented yet");
-  }
-  async updateTokenTimestamp(token: string, timestamp: number): Promise<void> {
-    throw new Error("Not implemented yet");
-  }
-  async deleteToken(token: string): Promise<void> {
-    throw new Error("Not implemented yet");
-  }
-}
 
 class DynamoFollowDaoStub implements FollowDao {
   async putFollow(followRecord: FollowRecord): Promise<void> {
@@ -94,7 +80,7 @@ class DynamoFeedDaoStub implements FeedDao {
 
 export class DynamoDaoFactory implements DaoFactory {
   private userDao: UserDao = new DynamoUserDao();
-  private authTokenDao: AuthTokenDao = new DynamoAuthTokenDaoStub();
+  private authTokenDao: AuthTokenDao = new DynamoAuthTokenDao();
   private followDao: FollowDao = new DynamoFollowDaoStub();
   private storyDao: StoryDao = new DynamoStoryDaoStub();
   private feedDao: FeedDao = new DynamoFeedDaoStub();
