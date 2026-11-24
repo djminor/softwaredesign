@@ -255,3 +255,9 @@
 - Tool: Antigravity
 - Task: Forward duration ?? 0 in AppNavbar.tsx displayInfoMessage and fix displayErrorMessage recursive self-call by delegating to useMessageActions().
 - Review: Found a few other instances of that same bug
+
+
+## 2026-11-24: tweeter/milestone-1/tweeter-web-starter/tweeter-web/src/components/hooks/MessageHooks.ts
+- Tool: Antigravity
+- Task: Set displayErrorMessage toast duration to 5000ms instead of 0 so error toasts (including login errors) auto-expire.
+- Review: This fixed another small bug I found

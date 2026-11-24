@@ -1,3 +1,4 @@
+// AI-assisted: see AI-ATTRIBUTION.md
 import { useContext } from "react"
 import { ToastActionsContext, ToastListContext } from "../toaster/ToastContexts"
 import { ToastType } from "../toaster/Toast"
@@ -20,7 +21,7 @@ export const useMessageActions = (): MessageActions => {
     const { displayToast, deleteToast, deleteAllToasts } = useContext(ToastActionsContext)
     return {
         displayInfoMessage: (message: string, duration:number, bootstrapClasses?: string) => displayToast(ToastType.Info, message, duration, undefined, bootstrapClasses),
-        displayErrorMessage: (message: string, bootstrapClasses?: string) => displayToast(ToastType.Error, message, 0, undefined, bootstrapClasses),
+        displayErrorMessage: (message: string, bootstrapClasses?: string) => displayToast(ToastType.Error, message, 5000, undefined, bootstrapClasses),
         deleteMessage: deleteToast,
         deleteAllMessages: deleteAllToasts
 
