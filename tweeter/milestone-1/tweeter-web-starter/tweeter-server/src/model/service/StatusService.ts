@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { AuthToken, FakeData, Status, StatusDto, User } from "tweeter-shared";
+import { StatusDto } from "tweeter-shared";
 import { Service } from "./Service";
 import { DaoFactory, DynamoDaoFactory, StatusRecord } from "../dao";
 import { AuthorizationService } from "./AuthorizationService";
@@ -22,12 +22,25 @@ export class StatusService implements Service {
     pageSize: number,
     lastItem: StatusDto | null
   ): Promise<[StatusDto[], boolean]> {
-    const [items, hasMore] = FakeData.instance.getPageOfStatuses(
-      Status.fromDto(lastItem),
-      pageSize
+    if (!userAlias) {
+      throw new Error("[Bad Request] Missing user alias");
+    }
+    if (!pageSize || pageSize <= 0) {
+      throw new Error("[Bad Request] Invalid page size");
+    }
+
+    await this.authService.validateToken(token);
+
+    const storyDao = this.daoFactory.getStoryDao();
+    const lastTimestamp = lastItem ? lastItem.timestamp : undefined;
+    const page = await storyDao.getPageOfStory(
+      userAlias,
+      pageSize,
+      lastTimestamp
     );
-    const dtos = items.map((status) => status.dto);
-    return [dtos, hasMore];
+
+    const items = page.values.map((record) => record.statusDto);
+    return [items, page.hasMorePages];
   }
 
   public async loadMoreFeedItems(
@@ -36,20 +49,25 @@ export class StatusService implements Service {
     pageSize: number,
     lastItem: StatusDto | null
   ): Promise<[StatusDto[], boolean]> {
-    const [items, hasMore] = FakeData.instance.getPageOfStatuses(
-      Status.fromDto(lastItem),
-      pageSize
-    );
-    const dtos = items.map((status) => status.dto);
-    return [dtos, hasMore];
-  }
+    if (!userAlias) {
+      throw new Error("[Bad Request] Missing user alias");
+    }
+    if (!pageSize || pageSize <= 0) {
+      throw new Error("[Bad Request] Invalid page size");
+    }
 
-  public async getUser(
-    authToken: AuthToken,
-    alias: string
-  ): Promise<User | null> {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.findUserByAlias(alias);
+    await this.authService.validateToken(token);
+
+    const feedDao = this.daoFactory.getFeedDao();
+    const lastTimestamp = lastItem ? lastItem.timestamp : undefined;
+    const page = await feedDao.getPageOfFeed(
+      userAlias,
+      pageSize,
+      lastTimestamp
+    );
+
+    const items = page.values.map((record) => record.statusDto);
+    return [items, page.hasMorePages];
   }
 
   public async postStatus(
