@@ -1,5 +1,5 @@
 // AI-assisted: see AI-ATTRIBUTION.md
-import { FakeData, UserDto } from "tweeter-shared";
+import { UserDto } from "tweeter-shared";
 import { Service } from "./Service";
 import { DaoFactory, DynamoDaoFactory } from "../dao";
 import { AuthorizationService } from "./AuthorizationService";
@@ -117,24 +117,42 @@ export class FollowService implements Service {
     user: UserDto,
     selectedUser: UserDto
   ): Promise<boolean> {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.isFollower();
+    if (!user || !user.alias || !selectedUser || !selectedUser.alias) {
+      throw new Error("[Bad Request] Missing user or selectedUser");
+    }
+
+    await this.authService.validateToken(token);
+
+    const followDao = this.daoFactory.getFollowDao();
+    return await followDao.isFollower(user.alias, selectedUser.alias);
   }
 
   public async getFolloweeCount(
     token: string,
     user: UserDto
   ): Promise<number> {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFolloweeCount(user.alias);
+    if (!user || !user.alias) {
+      throw new Error("[Bad Request] Missing user");
+    }
+
+    await this.authService.validateToken(token);
+
+    const userDao = this.daoFactory.getUserDao();
+    return await userDao.getFolloweeCount(user.alias);
   }
 
   public async getFollowerCount(
     token: string,
     user: UserDto
   ): Promise<number> {
-    // TODO: Replace with the result of calling server
-    return FakeData.instance.getFollowerCount(user.alias);
+    if (!user || !user.alias) {
+      throw new Error("[Bad Request] Missing user");
+    }
+
+    await this.authService.validateToken(token);
+
+    const userDao = this.daoFactory.getUserDao();
+    return await userDao.getFollowerCount(user.alias);
   }
 
   public async follow(
